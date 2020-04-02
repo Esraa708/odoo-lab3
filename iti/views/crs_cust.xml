@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="crm_view">
+            <field name="name">res_partner_inherit from view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"></field>
+            <field name="arch" type="xml">
+
+                <field name="industry_id" position="after">
+                    <field name="crm_patient_ids"/>
+                </field>
+
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_list">
+            <field name="name">res_partner_inherit from view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <field name="email" position="after">
+                    <field name="website" />
+                </field>
+
+            </field>
+        </record>
+    </data>
+</odoo>

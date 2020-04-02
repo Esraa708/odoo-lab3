@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="doctors_action">
+            <field name="name">docotrs</field>
+            <field name="res_model">doctors</field>
+        </record>
+        <record model="ir.ui.view" id="department">
+            <field name="name">doctors list</field>
+            <field name="model">doctors</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <!--                    <img src='iti/static/image/myimage.png'/>-->
+
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="department_from">
+            <field name="name">doctors form view</field>
+            <field name="model">doctors</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="basic info">
+                                <field name="first_name"/>
+                                <field name="last_name"/>
+                                <field name="image" widget="image"/>
+                            </group>
+
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

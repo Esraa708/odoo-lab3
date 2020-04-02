@@ -1,0 +1,115 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="patients_action">
+            <field name="name">Patients</field>
+            <field name="res_model">hms</field>
+        </record>
+        <record model="ir.ui.view" id="patient_view">
+            <field name="name">Patients</field>
+            <field name="model">hms</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="birth_date"/>
+                    <field name="cr_ratio"/>
+                    <field name="blooad_type"/>
+                    <field name="age"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="patient_from">
+            <field name="name">patient form view</field>
+            <field name="model">hms</field>
+            <field name="arch" type="xml">
+                <form>
+
+                    <sheet>
+                        <header>
+                            <button string="change status" type="object" name="change_patient_status"/>
+                            <field name="status" widget="statusbar"/>
+                        </header>
+                        <group>
+                            <group string="basic info">
+                                <field name="first_name" required="True"/>
+                                <field name="last_name" required="True"/>
+                                <field name="image"/>
+                                <field name="birth_date"/>
+                                <field name="age"/>
+                                <field name="address"/>
+                                <field name="email"/>
+                            </group>
+                            <group string="medical info">
+                                <field name="blooad_type"/>
+                                <field name="PCR"/>
+
+                                <field name="cr_ratio" attrs="{
+                                    'required':[('PCR','=',True)]
+                                }"/>
+
+                                <field name="department_id" domain="[('is_opened','=' ,True)]"/>
+                                <field name="depaetment_capicity"/>
+                                <field name="doctor_ids" widget="many2many_tags"  attrs="{
+                                    'readonly':[('department_id','=',False)]
+                                }"/>
+
+
+
+                            </group>
+                            <field name="history" attrs="{
+                                    'invisible':[('age','&lt;',50)]
+                                }"/>
+
+                        </group>
+                        <notebook>
+                            <page string="logs">
+                                    <field name="logs" >
+                                        <tree editable="top" create="true">
+                                            <field name="created_by"/>
+                                            <field name="date"/>
+                                            <field name="description"/>
+                                        </tree>
+                                    </field>
+
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <menuitem
+                id="hms_root_menu"
+                name="hms"
+        />
+        <menuitem
+                id="hms_data_menu"
+                name="patient data"
+                parent="hms_root_menu"
+        />
+
+        <menuitem
+                id="hms_patient_menu"
+                parent="hms_data_menu"
+                name="Readable Text"
+                sequence="1"
+                action="patients_action"
+        />
+        <menuitem
+                id="hms_department_menu"
+                parent="hms_data_menu"
+                name="departments_menu"
+                sequence="1"
+                action="departs_action"
+        />
+        <menuitem
+                id="hms_doctors_menu"
+                parent="hms_data_menu"
+                name="doctors_menu"
+                sequence="1"
+                action="doctors_action"
+        />
+
+
+    </data>
+</odoo>
